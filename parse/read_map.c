@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:32:04 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/12 07:50:48 by marvin           ###   ########.fr       */
+/*   Updated: 2023/11/12 22:29:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	check_empty(t_map *map)
 		free(line);
 	}
 	map->split_file = ft_split(map->str, '\n');
-	if (!map->split_file || check_space(map->split_file))
+	if (!map->split_file || checkspace(map->split_file))
 	{
 		print_error("Empty file");
 		close(map->empty_fd);
@@ -130,48 +130,55 @@ int is_space(char *map)
     return (0);
 }
 
-int get_path(char *path)
+// int get_path(char *path)
+// {
+//     int path_len = ft_strlen(path);
+
+//     if (path_len < 4)
+// 		return (0);
+//     if (ft_strcmp(path + path_len - 4, ".xpm") == 0) 
+//         return (1); 
+//     return (0);
+// }
+
+// void check_text(t_map *map)
+// {
+//     char *str = map->split_map[i];
+// 	char *path;
+// 	int i;
+
+//     if (ft_strncmp(str, "NO ", 3) == 0)
+//     else if (ft_strncmp(str, "SO ", 3) == 0)
+//     else if (ft_strncmp(str, "WE ", 3) == 0)
+//     else if (ft_strncmp(str, "EA ", 3) == 0)
+//     // else if (ft_strncmp(str, "F ", 2) == 0)
+//     // else if (ft_strncmp(str, "C ", 2) == 0)
+//     else
+//     {
+//        print_error("Wrong argument");
+//     }
+// }
+
+// void composed_map(t_map *map)
+// {
+// 	int first = 0;
+// 	int last = 0;
+
+// 	while (map->split_map[first++])
+// 	{
+// 		while (map->split_map[last++])
+// 		{
+// 			if (!is_valid(map->split_map[first][last]))
+// 				print_error("Invalid character in the map")
+// 		}
+// 	}
+// 	// check_walls(map);
+
+// }
+
+void	final_check(t_map *map)
 {
-    int path_len = ft_strlen(path);
-
-    if (path_len < 4)
-		return (0);
-    if (ft_strcmp(path + path_len - 4, ".xpm") == 0) 
-        return (1); 
-    return (0);
-}
-
-void check_text(t_map *map)
-{
-    char *str = map->split_map[i];
-	char *path;
-	int i;
-
-    if (ft_strncmp(str, "NO ", 3) == 0)
-    else if (ft_strncmp(str, "SO ", 3) == 0)
-    else if (ft_strncmp(str, "WE ", 3) == 0)
-    else if (ft_strncmp(str, "EA ", 3) == 0)
-    // else if (ft_strncmp(str, "F ", 2) == 0)
-    // else if (ft_strncmp(str, "C ", 2) == 0)
-    else
-    {
-       print_error("Wrong argument");
-    }
-}
-
-void composed_map(t_map *map)
-{
-	int first = 0;
-	int last = 0;
-
-	while (map->split_map[first++])
-	{
-		while (map->split_map[last++])
-		{
-			if (!is_valid(map->split_map[first][last]))
-				print_error("Invalid character in the map")
-		}
-	}
-	// check_walls(map);
-
+	check_args(map);
+	check_empty(map);
+	readmap(map);
 }

@@ -1,6 +1,8 @@
 NAME = Cub3D
 
-SOURCES = main.c read_map.c get_next_line\
+SOURCES = main.c read_map.c utils.c \ 
+		../get_next_line \
+		../Libft \
 			
 OBJECTS = $(SOURCES:.c=.o)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:31:51 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/11 02:21:27 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/12 22:21:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int main(int ac, char **av)
     (void)*av;
     if (ac == 2)
     {
-        readmap(&map);
+        printf("%s\n", "TESSSSSSSSST");
+        final_check(map);
     }
     else
         printf("INVALID ARGS");
