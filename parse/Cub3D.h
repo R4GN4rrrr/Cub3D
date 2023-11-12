@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:31:55 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/11 03:15:17 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/12 04:34:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_vars
 
 typedef struct s_map
 {
+	int		count;
 	char	*str;
 	int		fd;
 	int		pos_x;
