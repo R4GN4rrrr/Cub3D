@@ -3,16 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:32:04 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/12 22:29:59 by marvin           ###   ########.fr       */
+/*   Updated: 2023/11/13 04:48:10 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3D.h"
 
-void	readmap(t_map *map)
+void	read_map(int fd, t_map *map, char *line)
+{
+	if (line)
+	{
+		map->str = ft_calloc(1, 1);
+		map->str = ft_strjoin(map->str, line);
+		free(line);
+		while (1)
+		{
+			line = get_next_line(fd);
+			if (!line) //salat map
+				break ;
+			map->str = ft_strjoin(map->str, line);
+			free(line);
+		}
+		map->split_map = ft_split(map->str, '\n');
+	}
+	else
+	{
+		print_error("No Map!!");
+		close(map->fd);
+	}
+}
+void	read_textures(t_map *map)
 {
 	char	*line;
 
@@ -22,14 +45,20 @@ void	readmap(t_map *map)
 		exit(0);
 	while (line)
 	{
+		if (check_map(line))
+			break ;
 		map->str = ft_strjoin(map->str, line);
 		free(line);
 		line = get_next_line(map->fd);
 	}
-	map->split_map = ft_split(map->str, '\n');
+	map->split_text = ft_split(map->str, '\n');
+	free (map->str);
+	read_map(map->fd, map, line);
+	close(map->fd);
 }
 
-void	check_empty(t_map *map)
+
+void	empty_file(t_map *map)
 {
 	char	*line;
 
@@ -46,12 +75,13 @@ void	check_empty(t_map *map)
 	map->split_file = ft_split(map->str, '\n');
 	if (!map->split_file || checkspace(map->split_file))
 	{
-		print_error("Empty file");
+		print_error("Empty file! ");
 		close(map->empty_fd);
 	}
 	free(map->str);
 	close(map->empty_fd);
 }
+
 
 void	check_walls(t_map *map)
 {
@@ -82,12 +112,10 @@ void	check_walls(t_map *map)
 	}
 }
 
-void	check_args(int ac, char **av, t_map *map)
+void	check_args(char **av, t_map *map)
 {
-	if (ac != 2)
-        print_error("Invalid number of args");
-	else if (map_name(map->name))
-        print_error(" Invalid file name");
+	if (map_name(map->name))
+			print_error("Invalid file name");	
 	map->fd = open(av[1], O_RDONLY | __O_DIRECTORY);
 	if (map->fd > 0)
 	{
@@ -100,85 +128,13 @@ void	check_args(int ac, char **av, t_map *map)
 	map->argv = av[1];
 }
 
-int is_valid(char *map)
+
+void	final_check(int ac, char **av, t_map *map)
 {
-	char current;
-	int i = 0;
-    while (map[i])
-	{
-        current = map[i];
-        if (current != '0' && current != '1' && current != 'N' && current != 'S' && current != 'E' && current != 'W')
-            return (1);
-		i++;
-    }
-    return (0);
-}
-
-int is_space(char *map)
-{
-    char current;
-    int i = 0;
-    while (map[i]) {
-        current = map[i];
-        if (current != ' ')
-		{
-            if (!is_valid(map))
-                return (1); 
-        }
-        i++;
-    }
-    return (0);
-}
-
-// int get_path(char *path)
-// {
-//     int path_len = ft_strlen(path);
-
-//     if (path_len < 4)
-// 		return (0);
-//     if (ft_strcmp(path + path_len - 4, ".xpm") == 0) 
-//         return (1); 
-//     return (0);
-// }
-
-// void check_text(t_map *map)
-// {
-//     char *str = map->split_map[i];
-// 	char *path;
-// 	int i;
-
-//     if (ft_strncmp(str, "NO ", 3) == 0)
-//     else if (ft_strncmp(str, "SO ", 3) == 0)
-//     else if (ft_strncmp(str, "WE ", 3) == 0)
-//     else if (ft_strncmp(str, "EA ", 3) == 0)
-//     // else if (ft_strncmp(str, "F ", 2) == 0)
-//     // else if (ft_strncmp(str, "C ", 2) == 0)
-//     else
-//     {
-//        print_error("Wrong argument");
-//     }
-// }
-
-// void composed_map(t_map *map)
-// {
-// 	int first = 0;
-// 	int last = 0;
-
-// 	while (map->split_map[first++])
-// 	{
-// 		while (map->split_map[last++])
-// 		{
-// 			if (!is_valid(map->split_map[first][last]))
-// 				print_error("Invalid character in the map")
-// 		}
-// 	}
-// 	// check_walls(map);
-
-// }
-
-void	final_check(t_map *map)
-{
-	check_args(map);
-	check_empty(map);
-	readmap(map);
+	(void)ac;
+	check_args(av, map);
+	empty_file(map);
+	read_textures(map);
+	// check_textures(map);
+	composed_map(map);
 }
