@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:31:55 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/13 04:48:12 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/13 06:43:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memset(void *b, int c, size_t len);
 char	*ft_strchr(const char *s, int c);
-
+int	ft_isdigit(int c);
+int	ft_atoi(const char *str);
 
 #endif

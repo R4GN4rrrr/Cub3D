@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:32:04 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/13 04:48:10 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/13 06:58:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,6 @@ void	final_check(int ac, char **av, t_map *map)
 	check_args(av, map);
 	empty_file(map);
 	read_textures(map);
-	// check_textures(map);
-	composed_map(map);
+	check_textures(map);
+	// composed_map(map);
 }
