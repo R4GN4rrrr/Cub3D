@@ -11,7 +11,7 @@ OBJECTS = $(SOURCES:.c=.o)
 
 CC = cc
 
-CFLAGS = -Werror -Wextra -Wall #-g3 -fsanitize=adress
+CFLAGS = -Werror -Wextra -Wall #-g3 -fsanitize=address
 
 
 $(NAME) : $(OBJECTS) 

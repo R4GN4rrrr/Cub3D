@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:32:04 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/13 06:58:17 by marvin           ###   ########.fr       */
+/*   Updated: 2023/11/14 03:31:55 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,34 +83,34 @@ void	empty_file(t_map *map)
 }
 
 
-void	check_walls(t_map *map)
-{
-	t_vars	var;
+// void	check_walls(t_map *map)
+// {
+// 	t_vars	var;
 
-	var.a = 0;
-	var.b = 0;
-	var.c = ft_strlen(map->split_map[0]) - 1;
-	while (map->split_map[0][var.b])
-	{
-		if (map->split_map[0][var.b] != '1')
-			print_error("invalid map! Map must be closed/surrounded by walls. ");
-		var.b++;
-	}
-	while (map->split_map[var.a])
-	{
-		if (map->split_map[var.a][0] != '1')
-			print_error("invalid map! Map must be closed/surrounded by walls. ");
-		if (map->split_map[var.a][var.c] != '1')
-			print_error("invalid map! Map must be closed/surrounded by walls. ");
-		var.a++;
-	}
-	var.b = -1;
-	while (map->split_map[var.a - 1][++var.b])
-	{
-		if (map->split_map[var.a - 1][var.b] != '1')
-			print_error("invalid map! Map must be closed/surrounded by walls. ");
-	}
-}
+// 	var.a = 0;
+// 	var.b = 0;
+// 	var.c = ft_strlen(map->split_map[0]) - 1;
+// 	while (map->split_map[0][var.b])
+// 	{
+// 		if (map->split_map[0][var.b] != '1')
+// 			print_error("invalid map! Map must be closed/surrounded by walls. ");
+// 		var.b++;
+// 	}
+// 	while (map->split_map[var.a])
+// 	{
+// 		if (map->split_map[var.a][0] != '1')
+// 			print_error("invalid map! Map must be closed/surrounded by walls. ");
+// 		if (map->split_map[var.a][var.c] != '1')
+// 			print_error("invalid map! Map must be closed/surrounded by walls. ");
+// 		var.a++;
+// 	}
+// 	var.b = -1;
+// 	while (map->split_map[var.a - 1][++var.b])
+// 	{
+// 		if (map->split_map[var.a - 1][var.b] != '1')
+// 			print_error("invalid map! Map must be closed/surrounded by walls. ");
+// 	}
+// }
 
 void	check_args(char **av, t_map *map)
 {

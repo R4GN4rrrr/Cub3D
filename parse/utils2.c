@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:25 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/13 07:03:25 by marvin           ###   ########.fr       */
+/*   Updated: 2023/11/14 03:27:46 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ int is_valid(char *map)
     return (0);
 }
 
-int get_path(char *path)
+int get_path(char *line)
 {
+	char **splited = ft_split(line, ' ');
+	char *path = splited[1];
     int path_len = ft_strlen(path);
 
     if (path_len < 4)
@@ -45,16 +47,62 @@ int get_path(char *path)
         return (1); 
     return (0);
 }
+void check_lenght(t_map *map)
+{
+	char *line;
+	int len= 0;
+	int i = 0;
+	int check = 0;
+
+	while (line[i])
+	{
+		if (line[i] == ',')
+			len++;
+		i++;
+	}
+	i = 0;
+	while (map->split_arg[i])
+	{
+		if(ft_strlen(map->split_arg[i]) > 3)
+			check += 1;
+		i++;
+	}
+	if ( i > 3 || len > 2 || check > 0)
+		print_error("Invalid color format");
+}
+void	check_digits(t_map *map)
+{
+	char *line;
+	int i;
+	int j;
+
+	map->split_arg = ft_split(line, ',');
+	check_lenght(map);
+	i = 0;
+	while (map->split_arg[i])
+	{
+		j = 0;
+		while (map->split_arg[i][j])
+		{
+			if (!ft_isdigit(map->split_arg[i][j]))
+				print_error("Invalid color format");
+			else if (!((ft_atoi(map->split_arg[i] >= 0)) && (ft_atoi(map->split_arg[i] <= 255))))
+				print_error("Invalid RGB values. Must be in the range [0, 255]");
+			j++;
+		}
+		i++;
+	}
+	int r = ft_atoi(map->split_arg[0]);
+	int g = ft_atoi(map->split_arg[1]);
+	int b = ft_atoi(map->split_arg[2]);
+}
 
 void check_textures(t_map *map)
 {
 	int i = 0;
-	char *path = NULL;
     char *str;
-	char *color_str;
-	int len;
-
-    while (str && *str)
+	
+    while (map->count == 6 || map->split_text[i])
     {
 		str = map->split_text[i];
         while (my_isspace(*str))
@@ -62,32 +110,17 @@ void check_textures(t_map *map)
         if (ft_strncmp(str, "NO ", 3) == 0 || ft_strncmp(str, "SO ", 3) == 0 ||
             ft_strncmp(str, "WE ", 3) == 0 || ft_strncmp(str, "EA ", 3) == 0)
 		{
-			get_path(path);
+			get_path(str);
 			map->count++;	
 		}
 		else if (ft_strncmp(str, "F ", 2) == 0 || ft_strncmp(str, "C ", 2) == 0)
 		{
-			color_str = str + 2;
-			len = 0;
-			while (color_str[len] && color_str[len] != ',')
-			{
-				if (!ft_isdigit(color_str[len]))
-					print_error("Invalid color format");
-				len++;
-				if (color_str[len] > 3)
-					print_error("Bad Format!!");
-			}
-			if (color_str[len] != ',')
-				print_error("Invalid color format");
-			int r = ft_atoi(color_str);
-			int g = ft_atoi(color_str + len + 1);
-			int b = ft_atoi(color_str + len + 2);
-			if  (!((r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255)))
-				print_error("Invalid RGB values. Must be in the range [0, 255]");
+			check_digits(str);
 			map->count++;
 		}
         else
             print_error("Wrong argument");
+		i++;
         
     }
 }
