@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:32:04 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/14 04:15:40 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:40:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,6 @@ void	read_map(int fd, t_map *map, char *line)
 		close(map->fd);
 	}
 }
-void print(char **pr)
-{
-	int i = 0;
-	while (pr[i])
-	{
-		printf("%s", pr[i++]);
-		printf("\n");
-	}
-}
 void	read_textures(t_map *map)
 {
 	char	*line;
@@ -65,6 +56,7 @@ void	read_textures(t_map *map)
 	read_map(map->fd, map, line);
 	close(map->fd);
 }
+
 
 void	empty_file(t_map *map)
 {
@@ -143,6 +135,6 @@ void	final_check(int ac, char **av, t_map *map)
 	check_args(av, map);
 	empty_file(map);
 	read_textures(map);
-	check_textures(map);
+	// check_textures(map);
 	// composed_map(map);
 }

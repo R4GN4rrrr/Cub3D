@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:25 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/14 04:49:44 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:33:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,22 @@ void check_lenght(char **str)
 
 void	check_digits(char* str)
 {
+	int i = 0;
 
 	char** color = ft_split(str, ',');
+	printf("[%s]\n", str);
 	check_lenght(color);
 	print(color);
-	// exit(2);
+	while (str[i++])
+	{
+		printf("sjhdqlhsdlsqdl");
+		while (my_isspace(str[i]))
+			i++;
+		if (!(ft_atoi(str) >= 0 && ft_atoi(str) <= 255))
+			print_error("invalid range");
+
+	}
+	exit(2);
 	
 	// free(color);
 }
