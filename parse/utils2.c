@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:25 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/14 15:33:09 by marvin           ###   ########.fr       */
+/*   Updated: 2023/11/15 03:43:00 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,38 +16,42 @@ int is_valid(char *map)
 {
 	char current;
 	int i = 0;
-    while (map[i])
+	while (map[i])
 	{
-        current = map[i];
-        if (current != '0' && current != '1' && current != 'N' 
-		&& current != 'S' && current != 'E' && current != 'W')
-            return (1);
+		current = map[i];
+		if (current != '0' && current != '1' && current != 'N' && current != 'S' && current != 'E' && current != 'W')
+			return (1);
 		i++;
-    }
-    return (0);
+	}
+	return (0);
 }
 
-int get_path(char *line)
+void get_path(char *line)
 {
+	int fd = 0;
 	char **splited = ft_split(line, ' ');
-	char *path = splited[1];
-    int path_len = ft_strlen(path);
 
-    if (path_len < 4)
-		return (0);
-    // map->fd = open(av[1], O_RDONLY | __O_DIRECTORY);
-	// if (map->fd > 0)
-	// {
-	// 	print_error("It's a directory");
-	// 	close(map->fd);
-	// }
-	// map->fd = open(av[1], O_RDONLY);
-		// if (map->fd < 0)
-    //     print_error("File does not exist");
-    if (ft_strncmp(path + (path_len - 4), ".xpm", 4) == 0) 
-        return (1); 
-    return (0);
+	fd = open(splited[1], O_RDONLY | __O_DIRECTORY);
+	if (fd > 0)
+	{
+		ft_free(splited);
+		close(fd);
+		print_error("It's a directory\n");
+	}
+	fd = open(splited[1], O_RDONLY);
+	if (fd < 0)
+	{
+		ft_free(splited);
+		print_error("Wrong Texture File\n");
+	}
+	if (ft_strncmp(splited[1] + (ft_strlen(splited[1]) - 4), ".xpm", 4))
+	{
+		ft_free(splited);
+		print_error("Wrong Texture File\n");
+	}
+	ft_free(splited);
 }
+
 void check_lenght(char **str)
 {
 	int i = 0;
@@ -66,76 +70,75 @@ void check_lenght(char **str)
 			if (!ft_isdigit(str[i][j]))
 				print_error("only digits");
 		}
-		if(ft_strlen(str[i]) > 3)
+		if (ft_strlen(str[i]) > 3)
 			check += 1;
 		i++;
 	}
-	if ( i > 3 || check)
+	if (i > 3 || check)
 		print_error("Invalid color format");
 }
 
-void	check_digits(char* str)
+void check_digits(char *str)
 {
 	int i = 0;
 
-	char** color = ft_split(str, ',');
-	printf("[%s]\n", str);
+	char **color = ft_split(str, ',');
 	check_lenght(color);
-	print(color);
-	while (str[i++])
+	// print(color);
+	while (color[i])
 	{
-		printf("sjhdqlhsdlsqdl");
-		while (my_isspace(str[i]))
-			i++;
-		if (!(ft_atoi(str) >= 0 && ft_atoi(str) <= 255))
-			print_error("invalid range");
-
+		if (!((ft_atoi(color[i]) >= 0) && (ft_atoi(color[i]) <= 255)))
+			print_error("invalid range [0,255]\n");
+		i++;
 	}
-	exit(2);
-	
-	// free(color);
+	ft_free(color);
 }
 
+void check_textures_id(char *str, t_vars *id)
+{
+	if (ft_strncmp(str, "NO ", 3) == 0)
+		id->no++;
+	else if (ft_strncmp(str, "SO ", 3) == 0)
+		id->so++;
+	else if (ft_strncmp(str, "EA ", 3) == 0)
+		id->ea++;
+	else if (ft_strncmp(str, "WE ", 3) == 0)
+		id->we++;
+	else if (ft_strncmp(str, "F ", 2) == 0)
+		id->f++;
+	else if (ft_strncmp(str, "C ", 2) == 0)
+		id->c++;
+	if (id->no > 1 || id->c > 1 || id->ea > 1 || id->so > 1 || id->f > 1 || id->we > 1)
+		print_error("Duplicated id\n");
+}
 void check_textures(t_map *map)
 {
 	int i = 0;
-    char *str;
-	
-    while (map->count == 6 || map->split_text[i])
-    {
+	char *str = NULL;
+	map->count = 0;
+	t_vars vars;
+	ft_memset(&vars, 0, sizeof(t_vars));
+
+	while (map->split_text[i] && map->count != 6)
+	{
 		str = map->split_text[i];
-        while (my_isspace(*str))
-            str++;
-        if (ft_strncmp(str, "NO ", 3) == 0 || ft_strncmp(str, "SO ", 3) == 0 ||
-            ft_strncmp(str, "WE ", 3) == 0 || ft_strncmp(str, "EA ", 3) == 0)
+		while (my_isspace(*str))
+			str++;
+		if (ft_strncmp(str, "NO ", 3) == 0 || ft_strncmp(str, "SO ", 3) == 0 ||
+			ft_strncmp(str, "WE ", 3) == 0 || ft_strncmp(str, "EA ", 3) == 0)
 		{
+			check_textures_id(str, &vars);
 			get_path(str);
-			map->count++;	
+			map->count++;
 		}
 		else if (ft_strncmp(str, "F ", 2) == 0 || ft_strncmp(str, "C ", 2) == 0)
 		{
+			check_textures_id(str, &vars);
 			check_digits(str);
 			map->count++;
 		}
-        else
-            print_error("Wrong argument");
+		else
+			print_error("Wrong textures id\n");
 		i++;
-        
-    }
+	}
 }
-
-// void composed_map(t_map *map)
-// {
-// 	int first = 0;
-// 	int last = 0;
-
-// 	while (map->split_map[first++])
-// 	{
-// 		while (map->split_map[last++])
-// 		{
-// 			if (!is_valid(map->split_map[first][last]))
-// 				print_error("Invalid character in the map");
-// 		}
-// 	}
-// 	// check_walls(map);
-// }

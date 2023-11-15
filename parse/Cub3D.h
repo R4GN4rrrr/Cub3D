@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:31:55 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/14 04:22:32 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/15 02:59:21 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@
 
 typedef struct s_vars
 {
-	int	a;
-	int	b;
+	int no;
+	int so;
+	int we;
+	int ea;
+	int	f;
 	int	c;
 }	t_vars;
 
@@ -67,6 +70,7 @@ int	check_map(char *line);
 void check_textures(t_map *map);
 void composed_map(t_map *map);
 int is_valid(char *map);	
+void	ft_free(char **av);
 
 // ------------------LIBFT---------------
 char	*ft_substr(char const *s, unsigned int start, size_t len)
