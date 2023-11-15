@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:25 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/15 03:43:00 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/15 04:18:05 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,12 +127,14 @@ void check_textures(t_map *map)
 		if (ft_strncmp(str, "NO ", 3) == 0 || ft_strncmp(str, "SO ", 3) == 0 ||
 			ft_strncmp(str, "WE ", 3) == 0 || ft_strncmp(str, "EA ", 3) == 0)
 		{
+			printf("here\n");
 			check_textures_id(str, &vars);
 			get_path(str);
 			map->count++;
 		}
 		else if (ft_strncmp(str, "F ", 2) == 0 || ft_strncmp(str, "C ", 2) == 0)
 		{
+			printf("here1\n");
 			check_textures_id(str, &vars);
 			check_digits(str);
 			map->count++;
