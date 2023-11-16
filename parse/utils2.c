@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:25 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/15 04:18:05 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/16 07:50:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void check_textures_id(char *str, t_vars *id)
 	if (id->no > 1 || id->c > 1 || id->ea > 1 || id->so > 1 || id->f > 1 || id->we > 1)
 		print_error("Duplicated id\n");
 }
+
 void check_textures(t_map *map)
 {
 	int i = 0;
@@ -122,19 +123,20 @@ void check_textures(t_map *map)
 	while (map->split_text[i] && map->count != 6)
 	{
 		str = map->split_text[i];
+		// printf("%s\n", str);
 		while (my_isspace(*str))
 			str++;
 		if (ft_strncmp(str, "NO ", 3) == 0 || ft_strncmp(str, "SO ", 3) == 0 ||
 			ft_strncmp(str, "WE ", 3) == 0 || ft_strncmp(str, "EA ", 3) == 0)
 		{
-			printf("here\n");
+			// printf("here\n");
 			check_textures_id(str, &vars);
 			get_path(str);
 			map->count++;
 		}
 		else if (ft_strncmp(str, "F ", 2) == 0 || ft_strncmp(str, "C ", 2) == 0)
 		{
-			printf("here1\n");
+			// printf("here1\n");
 			check_textures_id(str, &vars);
 			check_digits(str);
 			map->count++;
