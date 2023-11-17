@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 01:59:09 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/13 02:22:27 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/17 11:35:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,18 @@ void	ft_free(char **av)
 	free(av);
 }
 
-int	check_map(char *line)
-{
-	int	i;
+// int	check_map(char *line)
+// {
+// 	int	i;
 
-	i = 0;
-	while (line[i] && my_isspace(line[i]))
-	{
-		if (line[i] == '\n')
-			return (0);
-		i++;
-	}
-	if (ft_strchr("NSWEFC", line[i]))
-		return (0);
-	return (1);
-}
+// 	i = 0;
+// 	while (line[i] && my_isspace(line[i]))
+// 	{
+// 		if (line[i] == '\n')
+// 			return (0);
+// 		i++;
+// 	}
+// 	if (ft_strchr("NSWEFC", line[i]))
+// 		return (0);
+// 	return (1);
+// }

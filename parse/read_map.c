@@ -6,34 +6,49 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:32:04 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/16 07:48:08 by marvin           ###   ########.fr       */
+/*   Updated: 2023/11/17 12:57:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3D.h"
 
-void	read_map(int fd, t_map *map, char *line)
+void	read_map_rd(t_map *map)
 {
-	if (line)
+	int i= 0;
+	int j = 0;
+	while (map->split_text[i++])
+		map->width++;
+	// 
+	map->split_map = ft_calloc(sizeof(char*),map->width - map->count)
+	while (map->split_text[i + map->count])
 	{
-		map->str = ft_calloc(1, 1);
-		map->str = ft_strjoin(map->str, line);
-		free(line);
-		while (1)
-		{
-			line = get_next_line(fd);
-			if (!line) //salat map
-				break ;
-			map->str = ft_strjoin(map->str, line);
-			free(line);
-		}
-		map->split_map = ft_split(map->str, '\n');
+
+		map->split_map[j] = ft_strdup(map->split_text[i + map->count ]);
+		printf("%s\n",map->split_map[j]);
+		exit(7);
+		// map->str = ft_calloc(1, 1);
+		// map->str = ft_strjoin(map->str, line);
+		// free(line);
+		// while (1)
+		// {
+		// 	line = get_next_line(fd);
+		// 	// if (!line) //salat map
+		// 	// 	break ;
+		// 	map->str = ft_strjoin(map->str, line);
+		// 	free(line);
+		// }
+		// map->split_map = ft_split(map->str, '\n');
+		i++;
+		j++;
 	}
-	else
-	{
-		print_error("No Map!!");
-		close(map->fd);
-	}
+	map->split_map[j] = 0;
+	print(map->split_map);
+	exit(0);
+	// else
+	// {
+	// 	print_error("No Map!!\n");
+	// 	close(map->fd);
+	// }
 }
 
 void print(char **pr)
@@ -56,15 +71,15 @@ void	read_textures(t_map *map)
 		exit(0);
 	while (line)
 	{
-		if (check_map(line))
-			break ;
+		// if (check_map(line))
+		// 	break ;
 		map->str = ft_strjoin(map->str, line);
 		free(line);
 		line = get_next_line(map->fd);
 	}
+	// free(line);
 	map->split_text = ft_split(map->str, '\n');
 	free (map->str);
-	read_map(map->fd, map, line);
 	close(map->fd);
 }
 
@@ -118,4 +133,6 @@ void	final_check(int ac, char **av, t_map *map)
 	empty_file(map);
 	read_textures(map);
 	check_textures(map);
+	read_map_rd(map);
+	final_map_check(map);
 }

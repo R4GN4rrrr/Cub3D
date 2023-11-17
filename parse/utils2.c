@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:25 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/16 07:50:58 by marvin           ###   ########.fr       */
+/*   Updated: 2023/11/17 10:05:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ void check_textures(t_map *map)
 		}
 		else if (ft_strncmp(str, "F ", 2) == 0 || ft_strncmp(str, "C ", 2) == 0)
 		{
+			// printf("[%s]\n", str);
 			// printf("here1\n");
 			check_textures_id(str, &vars);
 			check_digits(str);

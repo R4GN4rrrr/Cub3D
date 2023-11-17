@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:31:51 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/15 01:52:34 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:44:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 int main(int ac, char **av)
 {
-    t_map *map = malloc(sizeof(t_map));
+    t_map *map = malloc(sizeof(t_map));  
+	ft_memset(map, 0, sizeof(t_map));
+
     // (void)*av;
     if (ac == 2)
     {
@@ -24,4 +26,5 @@ int main(int ac, char **av)
     else
         printf("INVALID ARGS");
     free(map);
+    return 0;
 }
