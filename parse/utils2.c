@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:25 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/17 10:05:29 by marvin           ###   ########.fr       */
+/*   Updated: 2023/11/18 07:37:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int is_valid(char *map)
 	while (map[i])
 	{
 		current = map[i];
+		// printf("%s\n", map);
 		if (current != '0' && current != '1' && current != 'N' && current != 'S' && current != 'E' && current != 'W')
 			return (1);
 		i++;

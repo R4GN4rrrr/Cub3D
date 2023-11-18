@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:42 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/17 11:44:14 by marvin           ###   ########.fr       */
+/*   Updated: 2023/11/18 08:32:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int   count_line_map(char **map)
     return (i);
 }
 
-char	*fill_map(int width)
+char	*fill_map(int width, char *line)
 {
 	char	*fill_line;
 	int		i;
@@ -46,7 +46,12 @@ char	*fill_map(int width)
 	i = 0;
 	while (i < width + 2)
 	{
-		fill_line[i] = 'X';
+		if (ft_strchr("10NSWE", line[i]))
+		{
+			fill_line[i] = line[i];
+		}
+		else 
+		    fill_line[i] = 'X';
 		i++;
 	}
 	fill_line[i] = '\0';
@@ -56,29 +61,21 @@ char	*fill_map(int width)
 char	**dup_map(t_map *map, int width, int height)
 {
 	int	i;
-	int	j;
     char **dup =  malloc(sizeof(char *) * (height + 3));
-	dup[0] = fill_map(width);
+	dup[0] = fill_map(width, map->split_map[0]);
 	i = 1;
 	while (i < height + 1)
 	{
-		dup[i] = malloc(sizeof(char) * (width + 3));
-		j = 0;
-		while (j < width + 2)
-		{
-			if (j <= (int)ft_strlen(map->split_map[i - 1]) && ft_strchr("10NSWE", map->split_map[i - 1][j - 1]))
-				dup[i][j] = map->split_map[i - 1][j - 1];
-			else
-				dup[i][j] = 'X';
-			j++;
-		}
-		dup[i][j] = '\0';
+		dup[i] = fill_map(width, map->split_map[i]);
 		i++;
 	}
-	dup[i] = fill_map(width);
+	dup[i] = fill_map(width, map->split_map[i]);
 	dup[i + 1] = NULL;
+	print(dup);
+	exit(5);
 	return (dup);
 }
+
 
 int check_is_open(int i, int j, char **dup)
 {
@@ -134,7 +131,7 @@ int	check_walls(t_map *map)
 	dup = dup_map(map, width, height);
 	x = 0;
 	y = 0;
-	if (check_closed_map(dup, x, y, width, height))
+	if (!dup || check_closed_map(dup, x, y, width, height))
 		return (1);
 	ft_free(dup);
 	return (0);
@@ -142,14 +139,14 @@ int	check_walls(t_map *map)
 
 void	final_map_check(t_map *map)
 {
-	int	i = 0;
-	while (map->split_map[i])
-	{
-		// printf("[%s]\n", map->split_map[i]);
-		if (is_valid(map->split_map[i]))
-			print_error("Invalid Caracter in the map\n");
-		i++;
-	}
+	// int	i = 0;
+	// while (map->split_map[i])
+	// {
+	// 	// exit(5);
+	// 	if (is_valid(map->split_map[i]))
+	// 		print_error("Invalid Caracter in the map\n");
+	// 	i++;
+	// }
 	if (check_walls(map))
 		print_error("Invalid Map\n");
 }
