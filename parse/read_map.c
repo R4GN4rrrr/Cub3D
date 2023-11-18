@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:32:04 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/18 07:49:55 by marvin           ###   ########.fr       */
+/*   Updated: 2023/11/18 23:24:55 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,51 +30,7 @@ void	read_map_rd(t_map *map)
 	}
 	map->split_map[j] = NULL;
 	ft_free(map->split_text);
-	print(map->split_map);
-
-
-
-
-
-	// int i= 0;
-	// int j = 0;
-	// while (map->split_text[i++])
-	// 	map->width++;
-	// // print(map->split_text);
-	// // printf("[%d]\n", map->count);
-	// // exit(5);
-	// map->split_map = ft_calloc(sizeof(char*), map->width - map->count + 1);
-	// printf("%s\n", map->split_text[i + map->count]);
-	// exit(5);
-	// while (map->split_text[i + map->count])
-	// {
-
-	// 	// map->split_map[j] = ft_strdup(map->split_text[i + map->count ]);
-	// 	// printf("%s\n",map->split_map[j]);
-	// 	// exit(7);
-	// 	// map->str = ft_calloc(1, 1);
-	// 	// map->str = ft_strjoin(map->str, line);
-	// 	// free(line);
-	// 	// while (1)
-	// 	// {
-	// 	// 	line = get_next_line(fd);
-	// 	// 	// if (!line) //salat map
-	// 	// 	// 	break ;
-	// 	// 	map->str = ft_strjoin(map->str, line);
-	// 	// 	free(line);
-	// 	// }
-	// 	// map->split_map = ft_split(map->str, '\n');
-	// 	i++;
-	// 	j++;
-	// }
-	// map->split_map[j] = 0;
 	// print(map->split_map);
-	// exit(0);
-	// else
-	// {
-	// 	print_error("No Map!!\n");
-	// 	close(map->fd);
-	// }
 }
 
 

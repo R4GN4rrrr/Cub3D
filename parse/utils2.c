@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:25 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/18 07:37:04 by marvin           ###   ########.fr       */
+/*   Updated: 2023/11/19 00:10:39 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int is_valid(char *map)
 	while (map[i])
 	{
 		current = map[i];
-		// printf("%s\n", map);
-		if (current != '0' && current != '1' && current != 'N' && current != 'S' && current != 'E' && current != 'W')
+		if (current != '0' && current != '1' && current != 'N' && current != 'S' 
+		&& current != 'E' && current != 'W' && current != ' ')
 			return (1);
 		i++;
 	}
