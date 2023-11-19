@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:42 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/19 00:25:16 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/19 03:51:52 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ char	*fill_map(int width, char *line)
 	char	*fill_line;
 	int		i;
 
-	// fill_line = malloc(sizeof(char) * (width + 3)); 
 	fill_line = ft_calloc((width + 3), sizeof(char)); 
 	i = 0;
 	if (line)
@@ -75,15 +74,12 @@ char	**dup_map(t_map *map, int width, int height)
 	}
 	dup[i] = fill_map(width, NULL);
 	dup[i + 1] = NULL;
-	// print(dup);
-	// exit(2);
 	return (dup);
 }
 
 
 int check_is_open(int i, int j, char **dup)
 {
-	// printf("%d ------- %d\n" ,i, j);
 	if (dup[j][i] != 'X' && dup[j][i] != '1')
 		return (1);
 	return (0);

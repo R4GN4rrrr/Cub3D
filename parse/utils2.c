@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:25 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/19 00:10:39 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/19 03:46:25 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,14 @@ void check_lenght(char **str)
 		while (str[i][++j])
 		{
 			if (!ft_isdigit(str[i][j]))
-				print_error("only digits");
+				print_error("only digits\n");
 		}
 		if (ft_strlen(str[i]) > 3)
 			check += 1;
 		i++;
 	}
 	if (i > 3 || check)
-		print_error("Invalid color format");
+		print_error("Invalid color format\n");
 }
 
 void check_digits(char *str)
@@ -85,7 +85,6 @@ void check_digits(char *str)
 
 	char **color = ft_split(str, ',');
 	check_lenght(color);
-	// print(color);
 	while (color[i])
 	{
 		if (!((ft_atoi(color[i]) >= 0) && (ft_atoi(color[i]) <= 255)))
@@ -124,21 +123,17 @@ void check_textures(t_map *map)
 	while (map->split_text[i] && map->count != 6)
 	{
 		str = map->split_text[i];
-		// printf("%s\n", str);
 		while (my_isspace(*str))
 			str++;
 		if (ft_strncmp(str, "NO ", 3) == 0 || ft_strncmp(str, "SO ", 3) == 0 ||
 			ft_strncmp(str, "WE ", 3) == 0 || ft_strncmp(str, "EA ", 3) == 0)
 		{
-			// printf("here\n");
 			check_textures_id(str, &vars);
 			get_path(str);
 			map->count++;
 		}
 		else if (ft_strncmp(str, "F ", 2) == 0 || ft_strncmp(str, "C ", 2) == 0)
 		{
-			// printf("[%s]\n", str);
-			// printf("here1\n");
 			check_textures_id(str, &vars);
 			check_digits(str);
 			map->count++;
