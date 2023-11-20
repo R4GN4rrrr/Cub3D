@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:32:04 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/20 05:41:34 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/20 10:47:56 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	read_textures(t_map *map)
 	}
 	map->split_text = ft_split(map->str, '\n');
 	free(map->str);
-	print(map->split_text);
+	// print(map->split_text);
 	close(map->fd);
 }
 
@@ -94,7 +94,7 @@ void	empty_file(t_map *map)
 	map->split_file = ft_split(map->str, '\n');
 	if (!map->split_file || checkspace(map->split_file))
 	{
-		print_error("Empty file! ");
+		print_error("Empty file!\n");
 		close(map->empty_fd);
 	}
 	free(map->str);

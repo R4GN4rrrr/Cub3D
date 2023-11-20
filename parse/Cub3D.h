@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:31:55 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/20 05:43:54 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/20 11:08:40 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <unistd.h>
 // #include <mlx.h>
 # include <fcntl.h>
+# include <math.h>
 
 typedef struct s_vars
 {
@@ -33,11 +34,14 @@ typedef struct s_vars
 
 typedef struct s_map
 {
+	int		player_found;
+	double 	player_angle;
+	int		pos_x;
+	int		pos_y;
+	char 	vision;
 	int		count;
 	char	*str;
 	int		fd;
-	int		pos_x;
-	int		pos_y;
 	char	**split_map;
 	char	**split_text;
 	char	**split_file;
@@ -64,6 +68,7 @@ void		composed_map(t_map *map);
 int			is_valid(char *map);
 void		ft_free(char **av);
 void		final_map_check(t_map *map);
+int 	find_start_position(t_map *map);
 
 // ------------------LIBFT---------------
 char		*ft_substr(char const *s, unsigned int start, size_t len);
