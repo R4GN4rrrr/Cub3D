@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:32:04 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/18 23:24:55 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/20 01:55:14 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 void	read_map_rd(t_map *map)
 {
+	int	i;
+	int	j;
 
-	int i = 0;
-	int j = 0;
-
+	i = 0;
+	j = 0;
 	while (map->split_text[i++])
 		map->width++;
-	map->split_map = ft_calloc(sizeof(char*), map->width - map->count + 1);
+	map->split_map = ft_calloc(sizeof(char *), map->width - map->count + 1);
 	i = map->count;
 	while (map->split_text[i])
 	{
@@ -33,10 +34,11 @@ void	read_map_rd(t_map *map)
 	// print(map->split_map);
 }
 
-
-void print(char **pr)
+void	print(char **pr)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (pr[i])
 	{
 		printf("%s", pr[i++]);
@@ -62,10 +64,9 @@ void	read_textures(t_map *map)
 	}
 	// free(line);
 	map->split_text = ft_split(map->str, '\n');
-	free (map->str);
+	free(map->str);
 	close(map->fd);
 }
-
 
 void	empty_file(t_map *map)
 {
@@ -91,23 +92,21 @@ void	empty_file(t_map *map)
 	close(map->empty_fd);
 }
 
-
 void	check_args(char **av, t_map *map)
 {
 	if (map_name(map->name))
-			print_error("Invalid file name");	
+		print_error("Invalid file name\n");
 	map->fd = open(av[1], O_RDONLY | __O_DIRECTORY);
 	if (map->fd > 0)
 	{
-		print_error("It's a directory");
+		print_error("It's a directory\n");
 		close(map->fd);
 	}
 	map->fd = open(av[1], O_RDONLY);
 	if (map->fd < 0)
-        print_error("File does not exist");
+		print_error("File does not exist\n");
 	map->argv = av[1];
 }
-
 
 void	final_check(int ac, char **av, t_map *map)
 {

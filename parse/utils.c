@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 01:59:09 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/17 11:35:03 by marvin           ###   ########.fr       */
+/*   Updated: 2023/11/20 01:53:54 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_error(char *s)
 {
-	ft_putstr_fd ("Error\n", 2);
+	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(s, 2);
 	exit(0);
 }
@@ -26,16 +26,18 @@ int	map_name(char *name)
 	return (0);
 }
 
-int my_isspace(char c)
+int	my_isspace(char c)
 {
-    return (c == ' ' || c == '\t' || c == '\n' || c == '\r' || c == '\f' || c == '\v');
+	return (c == ' ' || c == '\t' || c == '\n' || c == '\r' || c == '\f'
+		|| c == '\v');
 }
 
 int	checkspace(char **array)
 {
-	int i = 0;
-	int j;
+	int	i;
+	int	j;
 
+	i = 0;
 	while (array[i])
 	{
 		j = 0;
@@ -60,19 +62,3 @@ void	ft_free(char **av)
 		free(av[i]);
 	free(av);
 }
-
-// int	check_map(char *line)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (line[i] && my_isspace(line[i]))
-// 	{
-// 		if (line[i] == '\n')
-// 			return (0);
-// 		i++;
-// 	}
-// 	if (ft_strchr("NSWEFC", line[i]))
-// 		return (0);
-// 	return (1);
-// }

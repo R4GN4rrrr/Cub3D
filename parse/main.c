@@ -6,24 +6,24 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:31:51 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/19 03:51:27 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/20 01:54:56 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3D.h"
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-    t_map *map = malloc(sizeof(t_map));  
+	t_map *map = malloc(sizeof(t_map));
 	ft_memset(map, 0, sizeof(t_map));
 
-    if (ac == 2)
-    {
-        map->name = av[1];
-        final_check(ac, av, map);
-    }
-    else
-        printf("INVALID ARGS\n");
-    free(map);
-    return 0;
+	if (ac == 2)
+	{
+		map->name = av[1];
+		final_check(ac, av, map);
+	}
+	else
+		printf("INVALID ARGS\n");
+	free(map);
+	return (0);
 }
