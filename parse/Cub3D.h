@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:31:55 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/20 01:54:50 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/20 05:43:54 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void		final_map_check(t_map *map);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 void		*ft_calloc(size_t count, size_t size);
 char		*ft_strdup(const char *s1);
-char		*ft_strjoin(char const *s1, char const *s2);
+char		*ft_strjoin(char *s1, char *s2);
 char		*ft_strtrim(char const *s1, char const *set);
 char		**ft_split(char const *s, char c);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);

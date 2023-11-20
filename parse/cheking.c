@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:42 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/20 02:00:06 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/20 04:43:22 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ char	**dup_map(t_map *map, int width, int height)
 	}
 	dup[i] = fill_map(width, NULL);
 	dup[i + 1] = NULL;
+	// print(dup);
 	return (dup);
 }
 

@@ -6,7 +6,7 @@ SOURCES = main.c read_map.c utils.c ../get_next_line/get_next_line.c  ../get_nex
 	../Libft/ft_putstr_fd.c  ../Libft/ft_atoi.c\
 	../Libft/ft_bzero.c ../Libft/ft_strtrim.c \
 	../Libft/ft_substr.c ../Libft/ft_strdup.c  \
-	../Libft/ft_memcpy.c cheking.c\
+	../Libft/ft_memcpy.c cheking.c utils3.c\
 
 
 	 

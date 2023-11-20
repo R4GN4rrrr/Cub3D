@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:32:04 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/20 01:55:14 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/20 05:41:34 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ void	read_map_rd(t_map *map)
 	while (map->split_text[i])
 	{
 		map->split_map[j] = ft_strdup(map->split_text[i]);
+		// printf("%s\n", map->split_map[j]);
+		if (map->split_map[j] && map->split_map[j][0] == '\n')
+		{
+			printf("hdgaskfjgaskfgas\n");
+			print_error("There is a new line in the map\n");
+		}
 		i++;
 		j++;
 	}
@@ -49,22 +55,25 @@ void	print(char **pr)
 void	read_textures(t_map *map)
 {
 	char	*line;
+	int		checker;
 
-	line = get_next_line(map->fd);
 	map->str = ft_calloc(1, 1);
-	if (line == NULL)
-		exit(0);
-	while (line)
+	checker = 0;
+	while (1)
 	{
-		// if (check_map(line))
-		// 	break ;
+		line = get_next_line(map->fd);
+		if (!line)
+			break ;
+		if (line[0] == ' ' || line[0] == '1')
+			checker = 1;
+		if (checker == 1 && line[0] == '\n')
+			print_error("Invalid Map1\n");
 		map->str = ft_strjoin(map->str, line);
 		free(line);
-		line = get_next_line(map->fd);
 	}
-	// free(line);
 	map->split_text = ft_split(map->str, '\n');
 	free(map->str);
+	print(map->split_text);
 	close(map->fd);
 }
 
