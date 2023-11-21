@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:32:04 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/20 10:47:56 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/21 11:04:53 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	read_map_rd(t_map *map)
 {
 	int	i;
 	int	j;
+	int flag = 0;
 
 	i = 0;
 	j = 0;
@@ -25,16 +26,14 @@ void	read_map_rd(t_map *map)
 	i = map->count;
 	while (map->split_text[i])
 	{
+		flag =1;
 		map->split_map[j] = ft_strdup(map->split_text[i]);
 		// printf("%s\n", map->split_map[j]);
-		if (map->split_map[j] && map->split_map[j][0] == '\n')
-		{
-			printf("hdgaskfjgaskfgas\n");
-			print_error("There is a new line in the map\n");
-		}
 		i++;
 		j++;
 	}
+	if (flag == 0)
+		print_error("thers is no map!\n");
 	map->split_map[j] = NULL;
 	ft_free(map->split_text);
 	// print(map->split_map);
@@ -65,7 +64,10 @@ void	read_textures(t_map *map)
 		if (!line)
 			break ;
 		if (line[0] == ' ' || line[0] == '1')
+		{
+			// printf("%s\n", line);
 			checker = 1;
+		}
 		if (checker == 1 && line[0] == '\n')
 			print_error("Invalid Map1\n");
 		map->str = ft_strjoin(map->str, line);

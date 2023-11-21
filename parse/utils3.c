@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 02:24:08 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/20 11:25:47 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/21 09:16:29 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,19 @@ int find_start_position(t_map *map)
             char current = map->split_map[i][j];
             if (current == 'N' || current == 'S' || current == 'E' || current == 'W')
             {
-                printf("%d\n", map->player_found);
-                if (map->player_found > 1)
-                {
-                    printf("jashfjkhf\n");
-                    print_error("More than 1 player in the map");
-                }
-                map->player_found = 1;
+                map->player_found++;
                 map->pos_x = j;
                 map->pos_y = i;
-                printf("player: %d\n", map->player_found);
-                return (1);
+                map->Caracter = current;
+                // printf("%c\n", map->Caracter);
             }
             j++;
         }
         i++;
     }
+    // printf("player: %d\n", map->player_found);
+    if (map->player_found > 1)
+        print_error("More than 1 player in the map\n");
     return (0); 
 }
 

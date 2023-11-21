@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:31:55 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/20 11:08:40 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/21 09:08:04 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_map
 	char	*name;
 	char	*argv;
 	int		width;
+	char	Caracter;
 }			t_map;
 
 void		print(char **pr);
