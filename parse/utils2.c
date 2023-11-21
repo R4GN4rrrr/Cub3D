@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:25 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/21 16:55:25 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/21 17:00:27 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void	check_lenght(char **str)
 		}
 		if (ft_strlen(str[i]) > 3)
 			check += 1;
-		printf("%d\n", i);
 		i++;
 	}
 	if (i > 3 || check)

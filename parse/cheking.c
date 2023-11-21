@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:42 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/21 09:09:44 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/21 22:35:32 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,6 @@ void	final_map_check(t_map *map)
 		i++;
 	}
 	find_start_position(map);
-	if (check_walls(map))
+	if (check_walls(map) || map->player_found == 0)
 		print_error("Invalid Map\n");
 }
