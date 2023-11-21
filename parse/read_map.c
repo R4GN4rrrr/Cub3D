@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:32:04 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/21 11:04:53 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/21 13:19:28 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ void	read_map_rd(t_map *map)
 {
 	int	i;
 	int	j;
-	int flag = 0;
+	int	flag;
 
+	flag = 0;
 	i = 0;
 	j = 0;
 	while (map->split_text[i++])
@@ -26,7 +27,7 @@ void	read_map_rd(t_map *map)
 	i = map->count;
 	while (map->split_text[i])
 	{
-		flag =1;
+		flag = 1;
 		map->split_map[j] = ft_strdup(map->split_text[i]);
 		// printf("%s\n", map->split_map[j]);
 		i++;

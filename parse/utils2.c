@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:25 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/21 10:56:32 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/21 13:18:43 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,24 @@ void	check_lenght(char **str)
 		print_error("Invalid color format\n");
 }
 
-
 void	check_digits(char *str)
 {
 	int		i;
-	char	**color; 
+	int		j;
+	char	**color;
+	int		verg;
 
+	j = 0;
 	i = 0;
+	verg = 0;
+	while (str[j])
+	{
+		if (str[j] == ',')
+			verg++;
+		j++;
+		if (verg > 2)
+			print_error("Invalid format\n");
+	}
 	color = ft_split(str, ',');
 	check_lenght(color);
 	while (color[i])
@@ -137,11 +148,7 @@ void	check_textures(t_map *map)
 	{
 		str = map->split_text[i];
 		while (my_isspace(*str))
-		{
-			// printf("here\n");
 			str++;
-		}
-		// printf("{%s}\n", str);
 		if (ft_strncmp(str, "NO ", 3) == 0 || ft_strncmp(str, "SO ", 3) == 0 ||
 			ft_strncmp(str, "WE ", 3) == 0 || ft_strncmp(str, "EA ", 3) == 0)
 		{
