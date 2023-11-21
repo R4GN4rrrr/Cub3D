@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:32:04 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/21 13:19:28 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/21 15:18:35 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	read_map_rd(t_map *map)
 	{
 		flag = 1;
 		map->split_map[j] = ft_strdup(map->split_text[i]);
-		// printf("%s\n", map->split_map[j]);
 		i++;
 		j++;
 	}
@@ -65,10 +64,7 @@ void	read_textures(t_map *map)
 		if (!line)
 			break ;
 		if (line[0] == ' ' || line[0] == '1')
-		{
-			// printf("%s\n", line);
 			checker = 1;
-		}
 		if (checker == 1 && line[0] == '\n')
 			print_error("Invalid Map1\n");
 		map->str = ft_strjoin(map->str, line);
@@ -77,6 +73,7 @@ void	read_textures(t_map *map)
 	map->split_text = ft_split(map->str, '\n');
 	free(map->str);
 	// print(map->split_text);
+	// exit(0);
 	close(map->fd);
 }
 
@@ -100,6 +97,7 @@ void	empty_file(t_map *map)
 		print_error("Empty file!\n");
 		close(map->empty_fd);
 	}
+	ft_free(map->split_file);
 	free(map->str);
 	close(map->empty_fd);
 }
