@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:25 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/21 15:20:26 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/21 16:55:25 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	check_lenght(char **str)
 		str[0] = ft_strtrim(str[0], "C ");
 	else
 		str[0] = ft_strtrim(str[0], "F ");
+	str[2] = ft_strtrim(str[2], " ");
 	while (str[i])
 	{
 		j = -1;
@@ -80,6 +81,7 @@ void	check_lenght(char **str)
 		}
 		if (ft_strlen(str[i]) > 3)
 			check += 1;
+		printf("%d\n", i);
 		i++;
 	}
 	if (i > 3 || check)
@@ -92,6 +94,8 @@ void	check_digits(char *str)
 	int		j;
 	char	**color;
 	int		verg;
+	char	*coloradd1;
+	char	*coloradd2;
 
 	j = 0;
 	i = 0;
@@ -105,6 +109,7 @@ void	check_digits(char *str)
 			print_error("Invalid format\n");
 	}
 	color = ft_split(str, ',');
+	coloradd1 = color[0], coloradd2 = color[2];
 	check_lenght(color);
 	while (color[i])
 	{
@@ -113,6 +118,7 @@ void	check_digits(char *str)
 		i++;
 	}
 	ft_free(color);
+	free(coloradd1), free(coloradd2);
 }
 
 void	check_textures_id(char *str, t_vars *id)

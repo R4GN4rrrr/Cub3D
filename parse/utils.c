@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 01:59:09 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/20 01:53:54 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/21 15:46:07 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_free(char **av)
 	int	i;
 
 	i = 0;
-	while (av[i++])
-		free(av[i]);
+	while (av[i])
+		free(av[i++]);
 	free(av);
 }

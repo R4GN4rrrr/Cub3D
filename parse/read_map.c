@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:32:04 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/21 15:18:35 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/21 15:48:01 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,21 @@ void	print(char **pr)
 		printf("\n");
 	}
 }
+int	startmap(char *line)
+{
+	size_t	i;
+	size_t	length;
+
+	length = ft_strlen(line);
+	if (length == 1)
+		return (0);
+	i = 0;
+	while ((line[i]) && (line[i] == ' ' || line[i] == '1'))
+		i++;
+	if (length - 1 == i)
+		return (1);
+	return (0);
+}
 
 void	read_textures(t_map *map)
 {
@@ -63,7 +78,7 @@ void	read_textures(t_map *map)
 		line = get_next_line(map->fd);
 		if (!line)
 			break ;
-		if (line[0] == ' ' || line[0] == '1')
+		if (checker == 0 && startmap(line))
 			checker = 1;
 		if (checker == 1 && line[0] == '\n')
 			print_error("Invalid Map1\n");
@@ -127,4 +142,5 @@ void	final_check(int ac, char **av, t_map *map)
 	check_textures(map);
 	read_map_rd(map);
 	final_map_check(map);
+	ft_free(map->split_map);
 }
