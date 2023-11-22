@@ -6,37 +6,11 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:42 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/21 22:35:32 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/22 17:38:34 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3D.h"
-
-int	biggest_line(char **map)
-{
-	int	i;
-	int	line;
-
-	i = 0;
-	line = 0;
-	while (map[i])
-	{
-		if (line < (int)ft_strlen(map[i]))
-			line = (int)ft_strlen(map[i]);
-		i++;
-	}
-	return (line);
-}
-
-int	count_line_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-		i++;
-	return (i);
-}
 
 char	*fill_map(int width, char *line)
 {
@@ -82,18 +56,6 @@ char	**dup_map(t_map *map, int width, int height)
 	dup[i + 1] = NULL;
 	// print(dup);
 	return (dup);
-}
-
-int	check_is_open(int i, int j, char **dup)
-{
-	if (dup[j][i] != 'X' && dup[j][i] != '1')
-		return (1);
-	return (0);
-}
-
-int	is_inside_map(int x, int y, int width, int height)
-{
-	return (x >= 0 && x < width && y >= 0 && y < height);
 }
 
 int	check_closed_map(char **dup_map, int x, int y, int width, int height)

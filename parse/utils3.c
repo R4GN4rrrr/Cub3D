@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 02:24:08 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/21 22:36:18 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/22 17:38:53 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,31 @@ void	set_player_vision(t_map *map)
 		map->player_angle = 0;
 	if (map->vision == 'E')
 		map->player_angle = M_PI;
+}
+
+void	check_args(char **av, t_map *map)
+{
+	if (map_name(map->name))
+		print_error("Invalid file name\n");
+	map->fd = open(av[1], O_RDONLY | __O_DIRECTORY);
+	if (map->fd > 0)
+	{
+		print_error("It's a directory\n");
+		close(map->fd);
+	}
+	map->fd = open(av[1], O_RDONLY);
+	if (map->fd < 0)
+		print_error("File does not exist\n");
+	map->argv = av[1];
+}
+void	print(char **pr)
+{
+	int i;
+
+	i = 0;
+	while (pr[i])
+	{
+		printf("%s", pr[i++]);
+		printf("\n");
+	}
 }

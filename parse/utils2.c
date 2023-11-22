@@ -6,28 +6,11 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:25 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/21 17:00:27 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/22 17:37:54 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3D.h"
-
-int	is_valid(char *map)
-{
-	char	current;
-	int		i;
-
-	i = 0;
-	while (map[i])
-	{
-		current = map[i];
-		if (current != '0' && current != '1' && current != 'N' && current != 'S'
-			&& current != 'E' && current != 'W' && current != ' ')
-			return (1);
-		i++;
-	}
-	return (0);
-}
 
 void	get_path(char *line)
 {

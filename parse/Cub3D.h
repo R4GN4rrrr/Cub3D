@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:31:55 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/21 16:52:20 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/22 17:38:37 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ typedef struct s_vars
 typedef struct s_map
 {
 	int		player_found;
-	double 	player_angle;
+	double	player_angle;
 	int		pos_x;
 	int		pos_y;
-	char 	vision;
+	char	vision;
 	int		count;
 	char	*str;
 	int		fd;
@@ -62,6 +62,7 @@ void		read_map_rd(t_map *map);
 void		read_textures(t_map *map);
 int			map_name(char *name);
 void		print_error(char *s);
+void		check_args(char **av, t_map *map);
 int			my_isspace(char c);
 int			checkspace(char **array);
 void		final_check(int ac, char **av, t_map *map);
@@ -71,7 +72,11 @@ void		composed_map(t_map *map);
 int			is_valid(char *map);
 void		ft_free(char **av);
 void		final_map_check(t_map *map);
-int 	find_start_position(t_map *map);
+int			find_start_position(t_map *map);
+int			is_inside_map(int x, int y, int width, int height);
+int			check_is_open(int i, int j, char **dup);
+int			biggest_line(char **map);
+int			count_line_map(char **map);
 
 // ------------------LIBFT---------------
 char		*ft_substr(char const *s, unsigned int start, size_t len);
