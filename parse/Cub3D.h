@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:31:55 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/22 17:38:37 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/22 23:28:22 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_map
 }			t_map;
 
 void		print(char **pr);
+int has_new_line (char *line);
 
 // --------------------CUB3D--------------
 void		read_map_rd(t_map *map);

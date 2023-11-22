@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:42 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/22 17:38:34 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/23 00:25:02 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int	check_closed_map(char **dup_map, int x, int y, int width, int height)
 	while (dup_map[y])
 	{
 		x = 0;
-		// printf("%d\n", x);
 		while (dup_map[y][x])
 		{
 			if (dup_map[y][x] == 'X')
@@ -75,9 +74,9 @@ int	check_closed_map(char **dup_map, int x, int y, int width, int height)
 					return (1);
 				}
 				else if ((is_inside_map(x - 1, y, width, height)
-							&& check_is_open(x - 1, y, dup_map))
+						&& check_is_open(x - 1, y, dup_map))
 						|| (is_inside_map(x, y - 1, width, height)
-							&& check_is_open(x, y - 1, dup_map)))
+						&& check_is_open(x, y - 1, dup_map)))
 				{
 					ft_free(dup_map);
 					return (1);
@@ -104,7 +103,7 @@ int	check_walls(t_map *map)
 	dup = dup_map(map, width, height);
 	x = 0;
 	y = 0;
-	if (!dup || check_closed_map(dup, x, y, width, height))
+	if (!dup || check_closed_map(dup, x, y, width, height + 2))
 		return (1);
 	ft_free(dup);
 	return (0);
