@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:32:04 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/22 23:33:40 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/23 16:29:14 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ void	read_map_rd(t_map *map)
 		i++;
 		j++;
 	}
+	check_last_line(map->split_map);
 	if (flag == 0)
 		print_error("thers is no map!\n");
 	map->split_map[j] = NULL;
 	ft_free(map->split_text);
-	// print(map->split_map);
 }
 
 int	startmap(char *line)
@@ -54,19 +54,6 @@ int	startmap(char *line)
 		return (1);
 	return (0);
 }
-
-// int has_new_line (char *line)
-// {
-//     int i = 0;
-
-//     while (line[i] != '\0')
-// 	{
-//         if (line[i] == '\n' && line[i + 1] == '\n')
-//             return (1);
-//         i++;
-//     }
-//     return (0);
-// }
 
 void	read_textures(t_map *map)
 {
@@ -89,8 +76,6 @@ void	read_textures(t_map *map)
 	}
 	map->split_text = ft_split(map->str, '\n');
 	free(map->str);
-	// print(map->split_text);
-	// exit(0);
 	close(map->fd);
 }
 

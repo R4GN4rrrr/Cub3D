@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2.c                                           :+:      :+:    :+:   */
+/*   check_text.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:25 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/22 17:37:54 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:11:01 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	check_lenght(char **str)
 		str[0] = ft_strtrim(str[0], "C ");
 	else
 		str[0] = ft_strtrim(str[0], "F ");
+	str[1] = ft_strtrim(str[1], " ");
 	str[2] = ft_strtrim(str[2], " ");
 	while (str[i])
 	{
@@ -70,28 +71,37 @@ void	check_lenght(char **str)
 		print_error("Invalid color format\n");
 }
 
+void	check_verg(char *str)
+{
+	int	i;
+	int	verg;
+
+	i = 0;
+	verg = 0;
+	while (str[i])
+	{
+		if (str[i] == ',')
+			verg++;
+		i++;
+		if (verg > 2)
+			print_error("Invalid Format\n");
+	}
+}
+
 void	check_digits(char *str)
 {
 	int		i;
-	int		j;
 	char	**color;
-	int		verg;
 	char	*coloradd1;
 	char	*coloradd2;
+	char	*coloradd3;
 
-	j = 0;
 	i = 0;
-	verg = 0;
-	while (str[j])
-	{
-		if (str[j] == ',')
-			verg++;
-		j++;
-		if (verg > 2)
-			print_error("Invalid format\n");
-	}
+	check_verg(str);
 	color = ft_split(str, ',');
-	coloradd1 = color[0], coloradd2 = color[2];
+	coloradd1 = color[0];
+	coloradd3 = color[1];
+	coloradd2 = color[2];
 	check_lenght(color);
 	while (color[i])
 	{
@@ -100,7 +110,9 @@ void	check_digits(char *str)
 		i++;
 	}
 	ft_free(color);
-	free(coloradd1), free(coloradd2);
+	free(coloradd1);
+	free(coloradd3);
+	free(coloradd2);
 }
 
 void	check_textures_id(char *str, t_vars *id)
@@ -128,17 +140,16 @@ void	check_textures(t_map *map)
 	char	*str;
 	t_vars	vars;
 
-	i = 0;
+	i = -1;
 	str = NULL;
-	map->count = 0;
 	ft_memset(&vars, 0, sizeof(t_vars));
-	while (map->split_text[i] && map->count != 6)
+	while (map->split_text[++i] && map->count != 6)
 	{
 		str = map->split_text[i];
 		while (my_isspace(*str))
 			str++;
-		if (ft_strncmp(str, "NO ", 3) == 0 || ft_strncmp(str, "SO ", 3) == 0 ||
-			ft_strncmp(str, "WE ", 3) == 0 || ft_strncmp(str, "EA ", 3) == 0)
+		if (ft_strncmp(str, "NO ", 3) == 0 || ft_strncmp(str, "SO ", 3) == 0
+			|| ft_strncmp(str, "WE ", 3) == 0 || ft_strncmp(str, "EA ", 3) == 0)
 		{
 			check_textures_id(str, &vars);
 			get_path(str);
@@ -152,6 +163,5 @@ void	check_textures(t_map *map)
 		}
 		else
 			print_error("Wrong textures id\n");
-		i++;
 	}
 }

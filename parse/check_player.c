@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils3.c                                           :+:      :+:    :+:   */
+/*   check_player.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 02:24:08 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/22 17:38:53 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:04:07 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	find_start_position(t_map *map)
 	int		j;
 	char	current;
 
-	i = 0;
-	while (map->split_map[i])
+	i = -1;
+	while (map->split_map[++i])
 	{
 		j = 0;
 		while (map->split_map[i][j])
@@ -31,11 +31,10 @@ int	find_start_position(t_map *map)
 				map->player_found++;
 				map->pos_x = j;
 				map->pos_y = i;
-				map->Caracter = current;
+				map->caracter = current;
 			}
 			j++;
 		}
-		i++;
 	}
 	if (map->player_found > 1)
 		print_error("More than 1 player in the map\n");
@@ -69,14 +68,32 @@ void	check_args(char **av, t_map *map)
 		print_error("File does not exist\n");
 	map->argv = av[1];
 }
+
 void	print(char **pr)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (pr[i])
 	{
 		printf("%s", pr[i++]);
 		printf("\n");
+	}
+}
+
+void	check_last_line(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (map[i + 1])
+		i++;
+	while (map[i][j])
+	{
+		if (map[i][j] != ' ' && map[i][j] != '1')
+			print_error("Invalid Map2\n");
+		j++;
 	}
 }

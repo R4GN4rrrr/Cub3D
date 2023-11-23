@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:31:55 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/23 02:44:50 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:04:01 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,10 @@ typedef struct s_map
 	char	*name;
 	char	*argv;
 	int		width;
-	char	Caracter;
+	char	caracter;
 }			t_map;
 
 void		print(char **pr);
-int has_new_line (char *line);
 
 // --------------------CUB3D--------------
 void		read_map_rd(t_map *map);
@@ -76,6 +75,7 @@ int			is_inside_map(int x, int y, int width, int height);
 int			check_is_open(int i, int j, char **dup);
 int			biggest_line(char **map);
 int			count_line_map(char **map);
+void		check_last_line(char **map);
 
 // ------------------LIBFT---------------
 char		*ft_substr(char const *s, unsigned int start, size_t len);
