@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:42 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/23 00:25:02 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/23 02:52:09 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ char	**dup_map(t_map *map, int width, int height)
 	}
 	dup[i] = fill_map(width, NULL);
 	dup[i + 1] = NULL;
-	// print(dup);
 	return (dup);
 }
 
@@ -63,6 +62,7 @@ int	check_closed_map(char **dup_map, int x, int y, int width, int height)
 	while (dup_map[y])
 	{
 		x = 0;
+		// printf("y: %d ------- x: %d\n", y, x);
 		while (dup_map[y][x])
 		{
 			if (dup_map[y][x] == 'X')
@@ -88,6 +88,7 @@ int	check_closed_map(char **dup_map, int x, int y, int width, int height)
 	}
 	return (0);
 }
+
 
 int	check_walls(t_map *map)
 {
