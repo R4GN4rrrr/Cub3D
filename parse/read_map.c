@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:32:04 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/23 16:29:14 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/23 20:14:33 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	read_map_rd(t_map *map)
 		i++;
 		j++;
 	}
-	check_last_line(map->split_map);
+	if (flag != 0)
+		check_last_line(map->split_map);
 	if (flag == 0)
 		print_error("thers is no map!\n");
 	map->split_map[j] = NULL;
