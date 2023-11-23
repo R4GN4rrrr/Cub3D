@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:25 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/23 20:19:15 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/23 21:06:06 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ void	check_lenght(char **str)
 	int	j;
 	int	check;
 
-	i = 0;
-	j = -1;
+	i = -1;
 	check = 0;
 	if (ft_strchr(str[0], 'C'))
 		str[0] = ft_strtrim(str[0], "C ");
@@ -55,7 +54,7 @@ void	check_lenght(char **str)
 		str[0] = ft_strtrim(str[0], "F ");
 	str[1] = ft_strtrim(str[1], " ");
 	str[2] = ft_strtrim(str[2], " ");
-	while (str[i])
+	while (str[++i])
 	{
 		j = -1;
 		while (str[i][++j])
@@ -65,7 +64,6 @@ void	check_lenght(char **str)
 		}
 		if (ft_strlen(str[i]) > 3)
 			check += 1;
-		i++;
 	}
 	if (i > 3 || check)
 		print_error("Invalid color format\n");
