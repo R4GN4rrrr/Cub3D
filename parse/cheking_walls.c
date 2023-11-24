@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:42 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/23 20:15:54 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/24 03:14:46 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,53 @@ char	**dup_map(t_map *map, int width, int height)
 	return (dup);
 }
 
-int	check_closed_map(char **dup_map, int x, int y, int width, int height)
+// int is_closed(char closed,char **dup_map, int width, int height)
+// {
+// 	int x = 0;
+// 	int y = 0;
+//     if (closed == 'X')
+//     {
+// 		y = 0;
+//        if ((dup_map[y][x + 1] && check_is_open(x + 1, y, dup_map))
+		// || (dup_map[y + 1] && check_is_open(x, y + 1, dup_map)))
+// 		{
+// 			return (1);
+// 		}
+//         else if ((is_inside_map(x - 1, y, width, height) && check_is_open(x
+			// 	- 1, y, dup_map)) || (is_inside_map(x, y - 1, width, height)
+			// && check_is_open(x, y - 1, dup_map)))
+// 		{
+
+// 			return (1);
+// 		}
+//     }
+//     return (0);
+// }
+
+// int check_closed_map(char **dup_map, int width, int height)
+// {
+//     int y = 0;
+//     while (dup_map[y])
+//     {
+//         int x = 0;
+//         while (dup_map[y][x])
+//         {
+//             if (is_closed(dup_map[y][x],dup_map, width, height))
+//             {
+//                 ft_free(dup_map);
+//                 return (1);
+//             }
+//             x++;
+//         }
+//         y++;
+//     }
+//     return (0);
+// }
+
+int	check_closed_map(char **dup_map, int y, int width, int height)
 {
+	int	x;
+
 	while (dup_map[y])
 	{
 		x = 0;
@@ -92,7 +137,6 @@ int	check_walls(t_map *map)
 {
 	char	**dup;
 	int		y;
-	int		x;
 	int		height;
 	int		width;
 
@@ -100,9 +144,8 @@ int	check_walls(t_map *map)
 	width = biggest_line(map->split_map);
 	dup = NULL;
 	dup = dup_map(map, width, height);
-	x = 0;
 	y = 0;
-	if (!dup || check_closed_map(dup, x, y, width, height))
+	if (!dup || check_closed_map(dup, y, width, height))
 		return (1);
 	ft_free(dup);
 	return (0);

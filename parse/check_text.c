@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:25 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/23 21:06:06 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/24 03:13:01 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	check_lenght(char **str)
 		if (ft_strlen(str[i]) > 3)
 			check += 1;
 	}
-	if (i > 3 || check)
+	if (i != 3 || check)
 		print_error("Invalid color format\n");
 }
 
@@ -94,7 +94,7 @@ void	check_digits(char *str)
 	char	*coloradd2;
 	char	*coloradd3;
 
-	i = 0;
+	i = -1;
 	check_verg(str);
 	if (!ft_strchr(str, ','))
 		print_error("Invalid Format2\n");
@@ -103,11 +103,10 @@ void	check_digits(char *str)
 	coloradd3 = color[1];
 	coloradd2 = color[2];
 	check_lenght(color);
-	while (color[i])
+	while (color[++i])
 	{
 		if (!((ft_atoi(color[i]) >= 0) && (ft_atoi(color[i]) <= 255)))
 			print_error("invalid range [0,255]\n");
-		i++;
 	}
 	ft_free(color);
 	free(coloradd1);
@@ -134,6 +133,25 @@ void	check_textures_id(char *str, t_vars *id)
 		print_error("Duplicated id\n");
 }
 
+void	check_textures_helper(char *str, t_vars *vars, t_map *map)
+{
+	if (ft_strncmp(str, "NO ", 3) == 0 || ft_strncmp(str, "SO ", 3) == 0
+		|| ft_strncmp(str, "WE ", 3) == 0 || ft_strncmp(str, "EA ", 3) == 0)
+	{
+		check_textures_id(str, vars);
+		get_path(str);
+		map->count++;
+	}
+	else if (ft_strncmp(str, "F ", 2) == 0 || ft_strncmp(str, "C ", 2) == 0)
+	{
+		check_textures_id(str, vars);
+		check_digits(str);
+		map->count++;
+	}
+	else
+		print_error("Wrong textures id\n");
+}
+
 void	check_textures(t_map *map)
 {
 	int		i;
@@ -148,20 +166,38 @@ void	check_textures(t_map *map)
 		str = map->split_text[i];
 		while (my_isspace(*str))
 			str++;
-		if (ft_strncmp(str, "NO ", 3) == 0 || ft_strncmp(str, "SO ", 3) == 0
-			|| ft_strncmp(str, "WE ", 3) == 0 || ft_strncmp(str, "EA ", 3) == 0)
-		{
-			check_textures_id(str, &vars);
-			get_path(str);
-			map->count++;
-		}
-		else if (ft_strncmp(str, "F ", 2) == 0 || ft_strncmp(str, "C ", 2) == 0)
-		{
-			check_textures_id(str, &vars);
-			check_digits(str);
-			map->count++;
-		}
-		else
-			print_error("Wrong textures id\n");
+		check_textures_helper(str, &vars, map);
 	}
 }
+
+// void	check_textures(t_map *map)
+// {
+// 	int		i;
+// 	char	*str;
+// 	t_vars	vars;
+
+// 	i = -1;
+// 	str = NULL;
+// 	ft_memset(&vars, 0, sizeof(t_vars));
+// 	while (map->split_text[++i] && map->count != 6)
+// 	{
+// 		str = map->split_text[i];
+// 		while (my_isspace(*str))
+// 			str++;
+// 		if (ft_strncmp(str, "NO ", 3) == 0 || ft_strncmp(str, "SO ", 3) == 0
+// 			|| ft_strncmp(str, "WE ", 3) == 0 || ft_strncmp(str, "EA ", 3) == 0)
+// 		{
+// 			check_textures_id(str, &vars);
+// 			get_path(str);
+// 			map->count++;
+// 		}
+// 		else if (ft_strncmp(str, "F ", 2) == 0 || ft_strncmp(str, "C ", 2) == 0)
+// 		{
+// 			check_textures_id(str, &vars);
+// 			check_digits(str);
+// 			map->count++;
+// 		}
+// 		else
+// 			print_error("Wrong textures id\n");
+// 	}
+// }
