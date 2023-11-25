@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:25 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/24 03:13:01 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/25 02:59:38 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	check_lenght(char **str)
 		print_error("Invalid color format\n");
 }
 
-void	check_verg(char *str)
+int	check_verg(char *str)
 {
 	int	i;
 	int	verg;
@@ -78,14 +78,16 @@ void	check_verg(char *str)
 	verg = 0;
 	while (str[i])
 	{
+		if (str[i] == ',' && str[i + 1] == ',')
+			print_error("Invalid\n");
 		if (str[i] == ',')
 			verg++;
 		i++;
 		if (verg > 2)
 			print_error("Invalid Format\n");
 	}
+	return (verg);
 }
-
 void	check_digits(char *str)
 {
 	int		i;
@@ -95,9 +97,10 @@ void	check_digits(char *str)
 	char	*coloradd3;
 
 	i = -1;
-	check_verg(str);
 	if (!ft_strchr(str, ','))
 		print_error("Invalid Format2\n");
+	if (check_verg(str) < 2)
+		print_error("Invalid Format3\n");
 	color = ft_split(str, ',');
 	coloradd1 = color[0];
 	coloradd3 = color[1];
