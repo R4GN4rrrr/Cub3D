@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 02:24:08 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/23 20:14:13 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/25 03:50:25 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,26 @@ void	check_args(char **av, t_map *map)
 	if (map->fd < 0)
 		print_error("File does not exist\n");
 	map->argv = av[1];
+}
+
+int	check_verg(char *str)
+{
+	int	i;
+	int	verg;
+
+	i = 0;
+	verg = 0;
+	while (str[i])
+	{
+		if (str[i] == ',' && str[i + 1] == ',')
+			print_error("Invalid\n");
+		if (str[i] == ',')
+			verg++;
+		i++;
+		if (verg > 2)
+			print_error("Invalid Format\n");
+	}
+	return (verg);
 }
 
 void	print(char **pr)

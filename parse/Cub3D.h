@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:31:55 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/23 17:04:01 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/25 03:49:32 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ int			check_is_open(int i, int j, char **dup);
 int			biggest_line(char **map);
 int			count_line_map(char **map);
 void		check_last_line(char **map);
+int			check_verg(char *str);
+void		get_path(char *line);
 
 // ------------------LIBFT---------------
 char		*ft_substr(char const *s, unsigned int start, size_t len);

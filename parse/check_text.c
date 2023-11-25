@@ -6,39 +6,11 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:25 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/25 02:59:38 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/25 03:48:41 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3D.h"
-
-void	get_path(char *line)
-{
-	int		fd;
-	char	**splited;
-
-	fd = 0;
-	splited = ft_split(line, ' ');
-	fd = open(splited[1], O_RDONLY | __O_DIRECTORY);
-	if (fd > 0)
-	{
-		ft_free(splited);
-		close(fd);
-		print_error("It's a directory\n");
-	}
-	fd = open(splited[1], O_RDONLY);
-	if (fd < 0)
-	{
-		ft_free(splited);
-		print_error("Wrong Texture File\n");
-	}
-	if (ft_strncmp(splited[1] + (ft_strlen(splited[1]) - 4), ".xpm", 4))
-	{
-		ft_free(splited);
-		print_error("Wrong Texture File\n");
-	}
-	ft_free(splited);
-}
 
 void	check_lenght(char **str)
 {
@@ -69,25 +41,6 @@ void	check_lenght(char **str)
 		print_error("Invalid color format\n");
 }
 
-int	check_verg(char *str)
-{
-	int	i;
-	int	verg;
-
-	i = 0;
-	verg = 0;
-	while (str[i])
-	{
-		if (str[i] == ',' && str[i + 1] == ',')
-			print_error("Invalid\n");
-		if (str[i] == ',')
-			verg++;
-		i++;
-		if (verg > 2)
-			print_error("Invalid Format\n");
-	}
-	return (verg);
-}
 void	check_digits(char *str)
 {
 	int		i;
@@ -172,35 +125,3 @@ void	check_textures(t_map *map)
 		check_textures_helper(str, &vars, map);
 	}
 }
-
-// void	check_textures(t_map *map)
-// {
-// 	int		i;
-// 	char	*str;
-// 	t_vars	vars;
-
-// 	i = -1;
-// 	str = NULL;
-// 	ft_memset(&vars, 0, sizeof(t_vars));
-// 	while (map->split_text[++i] && map->count != 6)
-// 	{
-// 		str = map->split_text[i];
-// 		while (my_isspace(*str))
-// 			str++;
-// 		if (ft_strncmp(str, "NO ", 3) == 0 || ft_strncmp(str, "SO ", 3) == 0
-// 			|| ft_strncmp(str, "WE ", 3) == 0 || ft_strncmp(str, "EA ", 3) == 0)
-// 		{
-// 			check_textures_id(str, &vars);
-// 			get_path(str);
-// 			map->count++;
-// 		}
-// 		else if (ft_strncmp(str, "F ", 2) == 0 || ft_strncmp(str, "C ", 2) == 0)
-// 		{
-// 			check_textures_id(str, &vars);
-// 			check_digits(str);
-// 			map->count++;
-// 		}
-// 		else
-// 			print_error("Wrong textures id\n");
-// 	}
-// }
