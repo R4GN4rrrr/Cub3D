@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cheking_walls.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aelbouaa <aelbouaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:42 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/25 05:48:25 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/26 15:24:30 by aelbouaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	check_walls(t_map *map)
 	return (0);
 }
 
-void	final_map_check(t_map *map)
+void	final_map_check(t_map *map, t_rayc *rayc)
 {
 	int	i;
 
@@ -113,7 +113,7 @@ void	final_map_check(t_map *map)
 			print_error("Invalid Caracter in the map\n");
 		i++;
 	}
-	find_start_position(map);
+	find_start_position(map, rayc);
 	if (check_walls(map) || map->player_found == 0)
 		print_error("Invalid Map\n");
 }

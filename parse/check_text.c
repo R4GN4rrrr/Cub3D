@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:25 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/25 03:48:41 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/28 00:29:06 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void	check_textures_helper(char *str, t_vars *vars, t_map *map)
 	{
 		check_textures_id(str, vars);
 		check_digits(str);
+		fill_rgb(map, str);
 		map->count++;
 	}
 	else
@@ -123,5 +124,6 @@ void	check_textures(t_map *map)
 		while (my_isspace(*str))
 			str++;
 		check_textures_helper(str, &vars, map);
+		fill_textures(map, str);
 	}
 }

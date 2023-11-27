@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:32:04 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/24 01:15:30 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/28 00:50:00 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	startmap(char *line)
 	return (0);
 }
 
-void	read_textures(t_map *map)
+void	read_texture(t_map *map)
 {
 	char	*line;
 	int		checker;
@@ -105,14 +105,13 @@ void	empty_file(t_map *map)
 	close(map->empty_fd);
 }
 
-void	final_check(int ac, char **av, t_map *map)
+void	final_check(int ac, char **av, t_map *map, t_rayc *rayc)
 {
 	(void)ac;
 	check_args(av, map);
 	empty_file(map);
-	read_textures(map);
+	read_texture(map);
 	check_textures(map);
 	read_map_rd(map);
-	final_map_check(map);
-	ft_free(map->split_map);
+	final_map_check(map, rayc);
 }

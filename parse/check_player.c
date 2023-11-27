@@ -6,13 +6,13 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 02:24:08 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/25 03:50:25 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/28 00:48:58 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3D.h"
 
-int	find_start_position(t_map *map)
+int	find_start_position(t_map *map, t_rayc *rayc)
 {
 	int		i;
 	int		j;
@@ -21,19 +21,19 @@ int	find_start_position(t_map *map)
 	i = -1;
 	while (map->split_map[++i])
 	{
-		j = 0;
-		while (map->split_map[i][j])
+		j = -1;
+		while (map->split_map[i][++j])
 		{
 			current = map->split_map[i][j];
 			if (current == 'N' || current == 'S' || current == 'E'
 				|| current == 'W')
 			{
 				map->player_found++;
-				map->pos_x = j;
-				map->pos_y = i;
+				rayc->pp_x = j * 50;
+				rayc->pp_y = i * 50;
 				map->caracter = current;
+				map->split_map[i][j] = '0';
 			}
-			j++;
 		}
 	}
 	if (map->player_found > 1)
@@ -41,16 +41,16 @@ int	find_start_position(t_map *map)
 	return (0);
 }
 
-void	set_player_vision(t_map *map)
+int	set_player_vision(t_map *map)
 {
-	if (map->vision == 'N')
-		map->player_angle = 3 * (M_PI / 2);
-	if (map->vision == 'S')
-		map->player_angle = M_PI / 2;
-	if (map->vision == 'W')
-		map->player_angle = 0;
-	if (map->vision == 'E')
-		map->player_angle = M_PI;
+	if (map->caracter == 'N')
+		return (270);
+	else if (map->caracter == 'S')
+		return (90);
+	else if (map->caracter == 'W')
+		return (0);
+	else
+		return (180);
 }
 
 void	check_args(char **av, t_map *map)
