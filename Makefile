@@ -7,17 +7,19 @@ SOURCES = parse/path.c parse/read_map.c parse/utils.c parse/check_player.c parse
 	Libft/ft_bzero.c Libft/ft_strtrim.c Libft/ft_substr.c Libft/ft_strdup.c  Libft/ft_memcpy.c\
 	src/main.c src/moves.c src/reycasting.c src/textures.c src/utils.c src/utils2.c\
 
+
 OBJECTS = $(SOURCES:.c=.o)
 
 CC = cc
 
 LINK_FLAGS = -L -lft -L./minilibx-linux -lmlx -L/usr/lib -lXext -lX11 -lm -lz
 
-CFLAGS = -Werror -Wextra -Wall  -fsanitize=address -g3
+CFLAGS = -Werror -Wextra -Wall  #-fsanitize=address -g3
 
 
 $(NAME) : $(OBJECTS) 
 	$(CC) $(CFLAGS) $(OBJECTS) $(LINK_FLAGS) -o $(NAME)
+
 
 all : $(NAME)
 

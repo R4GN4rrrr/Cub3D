@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:31:55 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/28 00:47:50 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/30 22:29:35 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 
 # include "../Libft/libft.h"
 # include "../get_next_line/get_next_line.h"
-# include "../minilibx-linux/mlx.h"
+# include "../../minilibx-linux/mlx.h"
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-
 # define WINDOW_WIDTH 1600.0
 # define WINDOW_HIEGHT 900.0
 # define RAYS 1600
@@ -50,7 +49,6 @@ typedef struct s_map
 	int				c_g;
 	int				c_b;
 	int				player_found;
-	double			player_angle;
 	int				pos_x;
 	int				pos_y;
 	char			vision;
@@ -86,28 +84,32 @@ typedef struct s_rayc
 	int				raw;
 	int				a;
 	int				b;
-	int				old_x;
 	void			*floor;
+	int				floor_rgb;
+	int				ceiling_rgb;
 	int				colom;
 	void			*ptr;
 	void			*newptr;
 	void			*img;
 	void			*new_window;
 	void			*window;
-	int				pp_x;
-	int				pp_y;
-	int				wallx;
-	int				wally;
-	int				ray_in_wall[RAYS];
+	double			pp_x;
+	double			pp_y;
+	double			wallx;
+	double			wally;
+	double			ray_in_wall[RAYS];
 	double			angel[RAYS];
 	char			dir[RAYS];
 	double			pre_inc_x[RAYS];
 	double			pre_inc_y[RAYS];
 	double			radian[RAYS];
-	double			x_inc[RAYS], y_inc[RAYS];
+	double			x_inc[RAYS];
+	double			y_inc[RAYS];
 	double			steps[RAYS];
-	double			x_cos[RAYS], y_sin[RAYS];
-	double			dx[RAYS], dy[RAYS];
+	double			x_cos[RAYS];
+	double			y_sin[RAYS];
+	double			dx[RAYS];
+	double			dy[RAYS];
 	double			ray[RAYS];
 	t_data			*data[5];
 }					t_rayc;
@@ -124,9 +126,6 @@ typedef struct txtr
 	int				inc;
 }					t_txtr;
 
-void				print(char **pr);
-void				fill_textures(t_map *map, char *line);
-void				fill_rgb(t_map *map, char *line);
 // --------------------CUB3D--------------
 void				read_map_rd(t_map *map);
 void				read_texture(t_map *map);
@@ -151,6 +150,9 @@ void				check_last_line(char **map);
 int					check_verg(char *str);
 void				get_path(char *line);
 int					set_player_vision(t_map *map);
+void				fill_textures(t_map *map, char *line);
+void				fill_rgb(t_map *map, char *line);
+void				mini_window(void);
 
 // ------------------LIBFT---------------
 char				*ft_substr(char const *s, unsigned int start, size_t len);
@@ -180,7 +182,7 @@ void				rotete_right(t_rayc *t_rayc);
 void				rotete_left(t_rayc *t_rayc);
 int					player(int event, t_rayc *t_rayc);
 void				backwards(t_rayc *t_rayc);
-int					ft_close(int event, t_rayc *rayc);
+int					ft_close(int event);
 double				dist(double x1, double y1, double x2, double y2);
 void				my_mlx_pixel_put(t_data *data, int y, int x, int color);
 unsigned int		my_mlx_pixel_get(t_data *data, int ytex, int xtex);
@@ -190,5 +192,8 @@ void				get_wich_textures(t_rayc *rayc, int x);
 void				put_textures(t_rayc *rayc, t_txtr *txtr, int x);
 void				the_wall(t_rayc *rayc);
 void				draw_floor(t_rayc *rayc, t_txtr *txtr);
+int					get_rgb(int r, int g, int b);
+void				draw_ceiling(t_rayc *rayc, t_txtr *txtr);
+void				sliding(t_rayc *rayc, double old_x_cos, double old_y_sin);
 
 #endif

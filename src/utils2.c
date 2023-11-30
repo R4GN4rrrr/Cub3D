@@ -6,11 +6,16 @@
 /*   By: aelbouaa <aelbouaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 06:30:28 by aelbouaa          #+#    #+#             */
-/*   Updated: 2023/11/27 06:35:05 by aelbouaa         ###   ########.fr       */
+/*   Updated: 2023/11/29 15:12:53 by aelbouaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parse/Cub3D.h"
+
+int	get_rgb(int r, int g, int b)
+{
+	return (r << 16 | g << 8 | b);
+}
 
 void	my_mlx_pixel_put(t_data *data, int y, int x, int color)
 {
@@ -44,6 +49,6 @@ int	player(int event, t_rayc *rayc)
 	else if (event == 65361)
 		rotete_left(rayc);
 	else if (event == 65307)
-		exit(1);
+		exit(0);
 	return (0);
 }

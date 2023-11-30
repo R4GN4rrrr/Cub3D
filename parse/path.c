@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aelbouaa <aelbouaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:31:51 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/28 00:49:43 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/28 08:34:03 by aelbouaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,35 @@ void	fill_rgb(t_map *map, char *line)
 
 	splited = ft_split(line, ' ');
 	color = ft_split(splited[1], ',');
-	if (ft_strncmp("F", splited[0], 2) == 0)
+	if (color[0] && color[1] && color[2])
 	{
-		map->f_r = ft_atoi(color[0]);
-		map->f_g = ft_atoi(color[1]);
-		map->f_b = ft_atoi(color[2]);
+		if (ft_strncmp("F", splited[0], 2) == 0)
+		{
+			map->f_r = ft_atoi(color[0]);
+			map->f_g = ft_atoi(color[1]);
+			map->f_b = ft_atoi(color[2]);
+		}
+		else if (ft_strncmp("C", splited[0], 2) == 0)
+		{
+			map->c_r = ft_atoi(color[0]);
+			map->c_g = ft_atoi(color[1]);
+			map->c_b = ft_atoi(color[2]);
+		}
 	}
-	else if (ft_strncmp("C", splited[0], 2) == 0)
-	{
-		map->c_r = ft_atoi(color[0]);
-		map->c_g = ft_atoi(color[1]);
-		map->c_b = ft_atoi(color[2]);
-	}
+	else
+		print_error("Invalid Format\n");
 	ft_free(splited);
 	ft_free(color);
+}
+
+void	mini_window(void)
+{
+	if (WINDOW_WIDTH > 1700.0 || WINDOW_WIDTH < 100.0)
+		print_error("Incompatible window\n");
+	else if (WINDOW_HIEGHT > 1200.0 || WINDOW_HIEGHT < 100.0)
+		print_error("Incompatible window\n");
+	else if (RAYS < 300.0 || RAYS > 3600.0)
+		print_error("Incompatible window\n");
+	else if (FOV < 60.0 || FOV > 90.0)
+		print_error("Incompatible window\n");
 }

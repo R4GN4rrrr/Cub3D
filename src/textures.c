@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aelbouaa <aelbouaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 06:11:39 by aelbouaa          #+#    #+#             */
-/*   Updated: 2023/11/27 23:25:15 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/30 02:38:30 by aelbouaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	put_textures(t_rayc *rayc, t_txtr *txtr, int x)
 		if (txtr->i < 0)
 			txtr->i = 0;
 		txtr->ws = ((WINDOW_HIEGHT / 2) - (txtr->wall / 2));
+		draw_ceiling(rayc, txtr);
 		while (txtr->inc < (int)txtr->wall && txtr->inc < WINDOW_HIEGHT)
 		{
 			get_wich_textures(rayc, x);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_player.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aelbouaa <aelbouaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 02:24:08 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/28 00:48:58 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/28 04:07:35 by aelbouaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	find_start_position(t_map *map, t_rayc *rayc)
 				|| current == 'W')
 			{
 				map->player_found++;
-				rayc->pp_x = j * 50;
-				rayc->pp_y = i * 50;
+				rayc->pp_x = (j * 50) + 25;
+				rayc->pp_y = (i * 50) + 25;
 				map->caracter = current;
 				map->split_map[i][j] = '0';
 			}
@@ -79,7 +79,7 @@ int	check_verg(char *str)
 	while (str[i])
 	{
 		if (str[i] == ',' && str[i + 1] == ',')
-			print_error("Invalid\n");
+			print_error("Invalid Format\n");
 		if (str[i] == ',')
 			verg++;
 		i++;
@@ -87,18 +87,6 @@ int	check_verg(char *str)
 			print_error("Invalid Format\n");
 	}
 	return (verg);
-}
-
-void	print(char **pr)
-{
-	int	i;
-
-	i = 0;
-	while (pr[i])
-	{
-		printf("%s", pr[i++]);
-		printf("\n");
-	}
 }
 
 void	check_last_line(char **map)
@@ -113,7 +101,7 @@ void	check_last_line(char **map)
 	while (map[i][j])
 	{
 		if (map[i][j] != ' ' && map[i][j] != '1')
-			print_error("Invalid Map2\n");
+			print_error("Invalid Map\n");
 		j++;
 	}
 }

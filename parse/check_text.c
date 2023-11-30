@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 01:24:25 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/11/28 00:29:06 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/28 03:28:47 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	check_digits(char *str)
 
 	i = -1;
 	if (!ft_strchr(str, ','))
-		print_error("Invalid Format2\n");
+		print_error("Invalid Format\n");
 	if (check_verg(str) < 2)
-		print_error("Invalid Format3\n");
+		print_error("Invalid Format\n");
 	color = ft_split(str, ',');
 	coloradd1 = color[0];
 	coloradd3 = color[1];

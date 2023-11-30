@@ -6,69 +6,39 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 05:42:40 by aelbouaa          #+#    #+#             */
-/*   Updated: 2023/11/27 23:25:55 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/11/30 22:36:39 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parse/Cub3D.h"
 
-// void    sliding(t_rayc *rayc)
-// {
-//     if (map->split_map[(rayc->pp_y + ((int)rayc->y_sin[RAYS / 2])) / 50]
-//     [map->pos-x/ 50] != '1' 
-//     && rayc->x_cos[RAYS / 2] < 4 && rayc->x_cos[RAYS / 2] > -4)
-//     {
-//         rayc->pp_y += ((int)rayc->y_sin[RAYS / 2] / 2);
-//         map->pos-x -= (int)rayc->x_cos[RAYS / 2];
-//         draw_rays(rayc);
-//     }
-//     else if (map->split_map[rayc->pp_y / 50]
-//     [(map->pos-x + ((int)rayc->x_cos[RAYS / 2]))/ 50] != '1' 
-//     && rayc->y_sin[RAYS / 2] < 4 && rayc->y_sin[RAYS / 2] > -4)
-//     {
-//         map->pos-x += ((int)rayc->x_cos[RAYS / 2] / 2);
-//         rayc->pp_y -= (int)rayc->y_sin[RAYS / 2];
-//         draw_rays(rayc);
-//     }
-//     else
-//     {
-//         map->pos-x -= (int)rayc->x_cos[RAYS / 2];
-//         rayc->pp_y -= (int)rayc->y_sin[RAYS / 2];
-//     }
-// }
+void	sliding(t_rayc *rayc, double old_x_cos, double old_y_sin)
+{
+	if (rayc->map[(int)(rayc->pp_y + ((int)rayc->y_sin[RAYS / 2])) / 50]
+	[(int)rayc->pp_x / 50] != '1'
+		&& rayc->x_cos[RAYS / 2] < 3 && rayc->x_cos[RAYS / 2] > -3)
+	{
+		rayc->pp_y += ((int)rayc->y_sin[RAYS / 2] / 2);
+		rayc->pp_x -= (int)rayc->x_cos[RAYS / 2];
+		draw_rays(rayc);
+	}
+	else if (rayc->map[(int)rayc->pp_y / 50]
+		[(int)(rayc->pp_x + ((int)rayc->x_cos[RAYS / 2])) / 50] != '1'
+		&& rayc->y_sin[RAYS / 2] < 3 && rayc->y_sin[RAYS / 2] > -3)
+	{
+		rayc->pp_x += ((int)rayc->x_cos[RAYS / 2] / 2);
+		rayc->pp_y -= (int)rayc->y_sin[RAYS / 2];
+		draw_rays(rayc);
+	}
+	else
+	{
+		rayc->pp_x -= (int)rayc->x_cos[RAYS / 2];
+		rayc->pp_y -= (int)rayc->y_sin[RAYS / 2];
+		rayc->x_cos[RAYS / 2] = old_x_cos;
+		rayc->y_sin[RAYS / 2] = old_y_sin;
+	}
+}
 
-// int mouse_move(int x, int y, t_rayc *rayc)
-// {
-//     (void)y;
-//     int i = 0;
-//     // mlx_mouse_get_pos(rayc->ptr, rayc->window, &rayc->a, &rayc->b);
-//     // if (rayc->a >= 700 || rayc->a <= 100)
-//     //     mlx_mouse_move(rayc->ptr, rayc->window, RAYS / 2, 300);
-//     if (x > rayc->old_x)
-//     {
-//         if (x >= rayc->old_x + 10)
-//             while (i < RAYS)
-//             {
-//                 rayc->angel[i] += 1.0;
-//                 i++;
-//             }
-//     }
-//     else
-//     {
-//         if (x <= rayc->old_x - 10)
-//             while (i < RAYS)
-//             {
-//                 rayc->angel[i] -= 1.0;
-// 				i++;
-//             }
-//     }
-//     draw_rays(rayc);
-//     rayc->old_x = x;
-//     return (0);
-// }
-
-// mlx_mouse_hide(rayc->ptr,rayc->window);
-// mlx_hook(rayc->window, 6, 1L << 6, &mouse_move, rayc);
 void	game(t_rayc *rayc, t_map *map)
 {
 	int		x;
@@ -89,10 +59,9 @@ void	game(t_rayc *rayc, t_map *map)
 		inc += (double)FOV / (double)RAYS;
 		x++;
 	}
-	rayc->old_x = WINDOW_WIDTH / 2;
 	draw_rays(rayc);
 	mlx_hook(rayc->window, 3, 3, &player, rayc);
-	mlx_hook(rayc->window, 17, 0, &ft_close, rayc);
+	mlx_hook(rayc->window, 17, 0, &ft_close, NULL);
 	mlx_loop(rayc->ptr);
 }
 
@@ -111,8 +80,8 @@ int	main(int ac, char **av)
 		map->name = av[1];
 		final_check(ac, av, map, rayc);
 		rayc->map = map->split_map;
-		// ft_free(map->split_map);
-		// print(map->split_map);
+		rayc->floor_rgb = get_rgb(map->f_r, map->f_g, map->f_b);
+		rayc->ceiling_rgb = get_rgb(map->c_r, map->c_g, map->c_b);
 		while (++x < 5)
 			rayc->data[x] = malloc(sizeof(t_data));
 		game(rayc, map);
